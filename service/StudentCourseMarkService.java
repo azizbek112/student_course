@@ -78,12 +78,38 @@ public class StudentCourseMarkService {
     }
 
     public List<Integer> getDaysMark(LocalDate date) {
-        List<Integer> markByDate = repository.getMarkByDate(LocalDateTime.of(date,LocalTime.MIN));
-        return markByDate;
+//        List<Integer> markByDate = repository.getMarkByDate(LocalDateTime.of(date,LocalTime.MIN));
+//        return markByDate;
+        return null;
     }
 
     public List<Integer> getBetween(LocalDate date1, LocalDate date2) {
-        List<Integer> betweenDays = repository.getBetweenDays(LocalDateTime.of(date1, LocalTime.MIN), LocalDateTime.of(date2, LocalTime.MAX));
-        return betweenDays;
+//        List<Integer> betweenDays = repository.getBetweenDays(LocalDateTime.of(date1, LocalTime.MIN), LocalDateTime.of(date2, LocalTime.MAX));
+//        return betweenDays;
+        return null;
+    }
+
+    public List<Integer> getListMarks() {
+        List<Integer> markLst = repository.getMarkLst();
+        return markLst;
+    }
+
+    public List<Integer> getMarkListById(Integer id) {
+        List<Integer> listMark = repository.getListMark(id);
+        return listMark;
+    }
+
+    public List<Integer> getMark3List() {
+        List<Integer> integers = repository.mark3List();
+        return integers;
+    }
+    public Integer getMark1List() {
+        Integer firstMark = repository.getFirstMark();
+        return firstMark;
+    }
+
+    public Object getCourseMarkList(Integer id) {
+        Integer firstCourseMark = repository.getFirstCourseMark(id);
+        return firstCourseMark;
     }
 }

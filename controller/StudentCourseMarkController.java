@@ -3,6 +3,7 @@ package com.example.lesson_72.controller;
 import com.example.lesson_72.dto.StudentCourseMarkDTO;
 import com.example.lesson_72.service.StudentCourseMarkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,4 +47,25 @@ public class StudentCourseMarkController {
     public ResponseEntity<?> getDaysBetween(@RequestParam("date1") LocalDate date1,@RequestParam("date2") LocalDate date2){
         return ResponseEntity.ok(service.getBetween(date1,date2));
     }
+    @GetMapping(value = "/getListMarkOrderByCreatedDate")
+    public ResponseEntity<?> getListMark(){
+        return ResponseEntity.ok(service.getListMarks());
+    }
+    @GetMapping(value = "/getListMarkByCourseId{id}")
+    public ResponseEntity<?> getMarkListById(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(service.getMarkListById(id));
+    }
+    @GetMapping(value = "/get3MarkList")
+    public ResponseEntity<?> getMark3List(){
+        return ResponseEntity.ok(service.getMark3List());
+    }
+    @GetMapping(value = "/get1MarkList")
+    public ResponseEntity<?> getMark1List(){
+        return ResponseEntity.ok(service.getMark1List());
+    }
+    @GetMapping(value = "/getCourseMarkList{id}")
+    public ResponseEntity<?> getCourseMarkList(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(service.getCourseMarkList(id));
+    }
+
 }
