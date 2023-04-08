@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +69,7 @@ public class StudentCourseMarkService {
     public Boolean deleteById(Integer id) {
         StudentCourseMarkEntity entity = get(id);
         Integer integer = repository.deleteById2(false, id);
+
         if (integer ==1){
             return true;
         }else {
@@ -76,7 +78,12 @@ public class StudentCourseMarkService {
     }
 
     public List<Integer> getDaysMark(LocalDate date) {
-        List<Integer> markByDate = repository.getMarkByDate(date);
+        List<Integer> markByDate = repository.getMarkByDate(LocalDateTime.of(date,LocalTime.MIN));
         return markByDate;
+    }
+
+    public List<Integer> getBetween(LocalDate date1, LocalDate date2) {
+        List<Integer> betweenDays = repository.getBetweenDays(LocalDateTime.of(date1, LocalTime.MIN), LocalDateTime.of(date2, LocalTime.MAX));
+        return betweenDays;
     }
 }

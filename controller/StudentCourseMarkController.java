@@ -42,4 +42,8 @@ public class StudentCourseMarkController {
     public ResponseEntity<?> getDaysMark(@PathVariable("date")LocalDate date){
         return ResponseEntity.ok(service.getDaysMark(date));
     }
+    @GetMapping(value = "/getBetweenDaysMark")
+    public ResponseEntity<?> getDaysBetween(@RequestParam("date1") LocalDate date1,@RequestParam("date2") LocalDate date2){
+        return ResponseEntity.ok(service.getBetween(date1,date2));
+    }
 }
