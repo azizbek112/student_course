@@ -39,4 +39,11 @@ public interface StudentCourseMarkRepository extends CrudRepository<StudentCours
     Integer getFirstMark();
     @Query(value = "select mark from StudentCourseMarkEntity where course.id=:id order by created_date limit 1",nativeQuery = true)
     Integer getFirstCourseMark(@Param("id") Integer id);
+    @Query("select max(mark) from StudentCourseMarkEntity where course.id=:id")
+    Integer getHighlyMark(@Param("id") Integer mark);
+    @Query("select avg(mark) from StudentCourseMarkEntity where course.id=:id")
+    Integer getAvgCourseMark(@Param("id") Integer id);
+    @Query("select count(mark) from StudentCourseMarkEntity  where course.id=:id")
+    Integer getCountsCourseMark(@Param("id") Integer id);
+
 }

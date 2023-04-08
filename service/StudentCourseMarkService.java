@@ -112,4 +112,19 @@ public class StudentCourseMarkService {
         Integer firstCourseMark = repository.getFirstCourseMark(id);
         return firstCourseMark;
     }
+
+    public Integer getHighlyMark(Integer id) {
+        Integer highlyMark = repository.getHighlyMark(id);
+        return highlyMark;
+    }
+
+    public Object getAvgCourseMark(Integer id) {
+        Integer avgCourseMark = repository.getAvgCourseMark(id);
+        return avgCourseMark;
+    }
+
+    public Integer getCountsCourseMark(Integer id) {
+        Integer countsCourseMark = repository.getCountsCourseMark(id);
+        return countsCourseMark;
+    }
 }

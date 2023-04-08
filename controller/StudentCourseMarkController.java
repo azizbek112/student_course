@@ -67,5 +67,16 @@ public class StudentCourseMarkController {
     public ResponseEntity<?> getCourseMarkList(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.getCourseMarkList(id));
     }
-
+    @GetMapping(value = "/getHighlyMark{id}")
+    public ResponseEntity<?> getHighlyMark(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(service.getHighlyMark(id));
+    }
+    @GetMapping(value = "/getAvgCourseMark{id}")
+    public ResponseEntity<?> getAvgCourseMark(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(service.getAvgCourseMark(id));
+    }
+    @GetMapping(value = "/getCountCourseMark{id}")
+    public ResponseEntity<?> getCountsCourseMark(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(service.getCountsCourseMark(id));
+    }
 }
