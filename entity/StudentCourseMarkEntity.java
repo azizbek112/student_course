@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -26,5 +27,6 @@ public class StudentCourseMarkEntity {
 
     private Integer mark;
     @Column(name = "creted_date")
-    private LocalDate created_date;
+    private LocalDateTime created_date;
+    private Boolean visible;
 }

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,13 +23,13 @@ public class StudentCourseMarkService {
     @Autowired
     private CourseService courseService;
     public StudentCourseMarkDTO create(StudentCourseMarkDTO studentCourseMarkDTO) {
-        StudentEntity studentEntity = studentService.get(studentCourseMarkDTO.getStudent_id());
-        CourseEntity courseEntity = courseService.get(studentCourseMarkDTO.getCourse_id());
+        StudentEntity studentEntity = studentService.get(studentCourseMarkDTO.getStudent().getId());
+        CourseEntity courseEntity = courseService.get(studentCourseMarkDTO.getCourse().getId());
         StudentCourseMarkEntity studentCourseMark=new StudentCourseMarkEntity();
         studentCourseMark.setCourse(courseEntity);
         studentCourseMark.setStudent(studentEntity);
         studentCourseMark.setMark(studentCourseMarkDTO.getMark());
-        studentCourseMark.setCreated_date(LocalDate.now());
+        studentCourseMark.setCreated_date(LocalDateTime.now());
         repository.save(studentCourseMark);
         studentCourseMarkDTO.setId(studentCourseMark.getId());
         return studentCourseMarkDTO;
@@ -36,9 +38,9 @@ public class StudentCourseMarkService {
     public StudentCourseMarkDTO getById(Integer id) {
         StudentCourseMarkEntity entity = get(id);
         StudentCourseMarkDTO studentCourseMarkDTO=new StudentCourseMarkDTO();
-        studentCourseMarkDTO.setCourse_id(entity.getCourse().getId());
+        studentCourseMarkDTO.setCourse(entity.getCourse());
         studentCourseMarkDTO.setMark(entity.getMark());
-        studentCourseMarkDTO.setStudent_id(entity.getStudent().getId());
+        studentCourseMarkDTO.setStudent(entity.getStudent());
         studentCourseMarkDTO.setId(entity.getId());
         return studentCourseMarkDTO;
     }
@@ -52,8 +54,8 @@ public class StudentCourseMarkService {
 
     public Boolean update(Integer id, StudentCourseMarkDTO dto) {
         StudentCourseMarkEntity studentCourseMark = get(id);
-        StudentEntity studentEntity = studentService.get(dto.getStudent_id());
-        CourseEntity courseEntity = courseService.get(dto.getCourse_id());
+        StudentEntity studentEntity = studentService.get(dto.getStudent().getId());
+        CourseEntity courseEntity = courseService.get(dto.getCourse().getId());
         StudentCourseMarkEntity entity=new StudentCourseMarkEntity();
         entity.setCourse(courseEntity);
         entity.setStudent(studentEntity);
@@ -61,5 +63,20 @@ public class StudentCourseMarkService {
         repository.save(entity);
         repository.delete(studentCourseMark);
         return true;
+    }
+
+    public Boolean deleteById(Integer id) {
+        StudentCourseMarkEntity entity = get(id);
+        Integer integer = repository.deleteById2(false, id);
+        if (integer ==1){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public List<Integer> getDaysMark(LocalDate date) {
+        List<Integer> markByDate = repository.getMarkByDate(date);
+        return markByDate;
     }
 }
